@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     @IBAction func button(sender: AnyObject) {
         
@@ -39,12 +41,15 @@ class ViewController: UIViewController {
 }
     
     func labelCreator(a:Int, b:Int){
-        let a10 = CGFloat(a*15)
-        let b10 = CGFloat(b*15)
-        let labelPlacement = CGRectMake(a10, b10, 50, 50)
+        let a10 = CGFloat(a*15+50)
+        let b10 = CGFloat(b*15+60)
+        let labelPlacement = CGRectMake(a10, b10, CGFloat(50), CGFloat(50))
+        
         let newLabel = UILabel.init()
         newLabel.frame = labelPlacement
+        //substitute A for specific index of array and loop through.
         newLabel.text = "A"
+        newLabel.userInteractionEnabled = true
         self.view.insertSubview(newLabel, atIndex:a)
         holderLabel = newLabel
 
@@ -54,8 +59,63 @@ class ViewController: UIViewController {
         holderLabel.removeFromSuperview()
         
         
-        
+
     }
+    
+    
+@IBAction func lettersTouched(recognizer:UIPanGestureRecognizer) {
+    
+    let translation = recognizer.translationInView(self.view)
+    print(recognizer.locationInView(self.view))
+    print(translation.x)
+    print(translation.y)
+    
+    }
+    
+    
+   // if recognizer.state == UIGestureRecognizerState.Began{
+
+
+        
+        //(x:recognizer.view!.center.x + (velocity.x * slideFactor),y:recognizer.view!.center.y + (velocity.y * slideFactor))
+    
+    
+   // }
+    
+    
+
+    
+
+    
+//    
+//    if let view = recognizer.view {
+//            view.center = CGPoint(x:view.center.x + translation.x,
+//                                  y:view.center.y + translation.y)
+//        }
+//        recognizer.setTranslation(CGPointZero, inView: self.view)
+//    }
+    
+    
+    
+    
+    
+//                var gesture = UIPanGestureRecognizer.init()
+//                var startGesture = UIGestureRecognizerState.Began
+//                var endGesture = UIGestureRecognizerState.Ended
+//                var cancelGesture = UIGestureRecognizerState.Cancelled
+//
+//    
+//    func lettersHit(){
+//        
+//       
+//        
+//        
+//    }
+//        
+    
+        
+        
+
     
     
     
