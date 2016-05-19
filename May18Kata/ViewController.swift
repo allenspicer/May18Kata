@@ -10,115 +10,127 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    //allow user to input number of rows and columns
     @IBOutlet var xVariable: UITextField!
     @IBOutlet var yVariable: UITextField!
-    var holderLabel = UILabel.init()
     
+
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad(
         
+
         
-    }
+}
+    //trigger to create set of labels
     @IBAction func button(sender: AnyObject) {
         
+        //if something is input by user
         if (Int(xVariable.text!) != nil && Int(yVariable.text!) != nil){
         
-        var x = Int(xVariable.text!)
+        //change user input to int
+        var x = Int(xVariable.text!)!
+        var y = Int(yVariable.text!)!
+
+       //store x value for later
         let xSub = x
-        var y = Int(yVariable.text!)
         
+        //loop through y values (columns)
         while (y>0){
-        
+            
+                //loop through x values (rows). One row for each y value
                 while (x>0) {
-                    
-                labelCreator(x!,b:y!)
-                    x = x!-1
+                
+                //each time through fire label creator
+                labelCreator(x,b:y)
+                    x = x-1
                 }
             x = xSub
-         y = y!-1
+         y = y-1
         }
     }
 }
+
     
+    //take integer form of user input
     func labelCreator(a:Int, b:Int){
-        let a10 = CGFloat(a*15+50)
-        let b10 = CGFloat(b*15+60)
-        let labelPlacement = CGRectMake(a10, b10, CGFloat(50), CGFloat(50))
+        //convert int to float
+        let a10 = CGFloat(a*35)
+        let b10 = CGFloat(b*35)
         
-        let newLabel = UILabel.init()
-        newLabel.frame = labelPlacement
-        //substitute A for specific index of array and loop through.
+        //create unique frame on the view using these inputs
+        let labelPlacement = CGRectMake(a10, b10, CGFloat(30), CGFloat(30))
+        
+        //create a label with the frame
+        let newLabel = UILabel.init(frame: labelPlacement)
+        
+//substitute this text for specific index of array and loop through.
         newLabel.text = "A"
         newLabel.userInteractionEnabled = true
-        self.view.insertSubview(newLabel, atIndex:a)
-        holderLabel = newLabel
-
+        self.view.insertSubview(newLabel, atIndex: a)
     }
 
-    @IBAction func clearLabels(sender: UIButton) {
-        holderLabel.removeFromSuperview()
-        
-        
 
-    }
-    
+//    
+//   func  pointInside(point: CGPoint, withEvent event: UIEvent?){
+//        
+//    }
     
 @IBAction func lettersTouched(recognizer:UIPanGestureRecognizer) {
     
-    let translation = recognizer.translationInView(self.view)
-    print(recognizer.locationInView(self.view))
-    print(translation.x)
-    print(translation.y)
     
+    
+    let placeOnView = recognizer.locationInView(self.view)
+    
+    switch recognizer.state {
+    case .Changed:
+        if let subViewTouched = self.view.hitTest(placeOnView, withEvent: nil) as? UILabel {
+        subViewTouched.backgroundColor = .redColor()
+        print(subViewTouched)
+            print(placeOnView) }
+    default:
+        break
+        }
     }
-    
-    
-   // if recognizer.state == UIGestureRecognizerState.Began{
 
 
-        
-        //(x:recognizer.view!.center.x + (velocity.x * slideFactor),y:recognizer.view!.center.y + (velocity.y * slideFactor))
-    
-    
-   // }
-    
-    
 
     
-
-    
-//    
-//    if let view = recognizer.view {
-//            view.center = CGPoint(x:view.center.x + translation.x,
-//                                  y:view.center.y + translation.y)
-//        }
-//        recognizer.setTranslation(CGPointZero, inView: self.view)
-//    }
     
     
-    
-    
-    
-//                var gesture = UIPanGestureRecognizer.init()
-//                var startGesture = UIGestureRecognizerState.Began
-//                var endGesture = UIGestureRecognizerState.Ended
-//                var cancelGesture = UIGestureRecognizerState.Cancelled
+//    if (dictionary.contains(recognizer.locationInView(self.view))){
+//        print(recognizer.locationInView(self.view))}
 //
 //    
-//    func lettersHit(){
-//        
-//       
-//        
+//    
+//    let translation = recognizer.translationInView(self.view)
+//    print("dot")
+//    print(recognizer.locationInView(self.view))
+////    print(translation)
+//   // print(translation.x)
+//    // print(translation.y)
+//    let possibleCharacters = dictionary
+//   // print(dictionary)
+//    let pointTouched = recognizer.locationInView(self.view)
+//   // print(recognizer.locationInView(self.view))
+//     let xint = Int(pointTouched.x)
+//    let yint = Int(pointTouched.y)
+//    
+//    let result = (dictionary as NSDictionary).allKeysForObject("\(xint),\(yint)")
+//   // if (result != "[]"){
+//        print(result)
+//
+//   // }
+//    
+//    
+//    }
+//
+//    class LabelClass: UILabel{
 //        
 //    }
-//        
-    
-        
-        
 
     
     
-    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
